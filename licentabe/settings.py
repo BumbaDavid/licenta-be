@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'licentadb',
         'USER': 'licentauser',
         'PASSWORD': 'password',
-        'HOST': '172.17.0.2',
+        'HOST': '172.18.0.2',
         'PORT': '5432',  # Set to empty string for default
     }
 }
@@ -130,22 +130,4 @@ AUTH_USER_MODEL = 'myapp.UserLogin'
 LOGIN_URL = '/admin/login/'
 CORS_ORIGIN_ALLOW_ALL = True
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/home/david/david/LICENTA/BE/debug.log',  # Adjust the path as needed
-        },
-    },
-    'loggers': {
-        'myapp': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}
 

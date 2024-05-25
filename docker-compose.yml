@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: licentauser
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: licentadb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: david.bumba0607@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+
+volumes:
+  pgdata:

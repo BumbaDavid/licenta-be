@@ -116,7 +116,7 @@ class UserLoginResource(ModelResource):
             user = api_key_obj.user
             user_data = UserLogin.objects.get(id=user.id)
             profile = user_data.user_profile
-            user_cv = user_data.user_cv
+            user_cv = getattr(user_data, 'user_cv', None)
             data_to_send = {
                 'username': user_data.username,
                 'email': user_data.email,
@@ -129,11 +129,11 @@ class UserLoginResource(ModelResource):
                     'age': profile.age
                 },
                 'user_cv': {
-                    'studies': user_cv.studies,
-                    'experience': user_cv.experience,
-                    'abilities': user_cv.abilities,
-                    'languages': user_cv.languages,
-                    'hobbies': user_cv.hobbies
+                    'studies': user_cv.studies if user_cv else [],
+                    'experience': user_cv.experience if user_cv else [],
+                    'abilities': user_cv.abilities if user_cv else [],
+                    'languages': user_cv.languages if user_cv else [],
+                    'hobbies': user_cv.hobbies if user_cv else []
                 },
                 'date_joined': user_data.date_joined
             }
@@ -192,8 +192,8 @@ class UserCVResource(ModelResource):
 
     def prepend_urls(self):
         return [
-            re_path(r"^(?P<resource_name>%s)/update-cv/$" % self._meta.resource_name, self.wrap_view('update_userCV'),
-                    name="api_update_userCV")
+            re_path(r"^(?P<resource_name>%s)/update-cv/$" % self._meta.resource_name, self.wrap_view('update_user_cv'),
+                    name="api_update_user_cv")
         ]
 
     def obj_create(self, bundle, **kwargs):
@@ -229,8 +229,8 @@ class UserCVResource(ModelResource):
         bundle.obj = user_cv
         raise ImmediateHttpResponse(response=self.create_response(bundle.request, bundle, response_class=HttpCreated))
 
-    def update_userCV(self, request, **kwargs):
-        self.method_check(request, allowed=['patch'])
+    def update_user_cv(self, request, **kwargs):
+        self.method_check(request, allowed=['patch', 'delete'])
         api_key = request.META.get('HTTP_AUTHORIZATION')
         if not api_key:
             return self.create_response(request, {'error': 'No API Key provided'}, HttpUnauthorized)
@@ -246,25 +246,52 @@ class UserCVResource(ModelResource):
             raise NotFound("cv not found lol")
 
         try:
-            data = json.loads(request.body)
+            payload = json.loads(request.body)
+            data = payload.get('data', {})
+            action = payload.get('action', '')
         except ValueError:
             return self.create_response(request, {'error': 'invalid json data'}, HttpBadRequest)
 
         fields_to_update = ['studies', 'experience', 'abilities', 'languages', 'hobbies']
-        try:
-            for field in fields_to_update:
-                if field in data:
-                    current_values = getattr(cv, field, [])
-                    if not isinstance(data[field], list):  # Ensure the incoming data for array fields is a list
-                        return self.create_response(request, {'error': f'{field} must be a list'}, HttpBadRequest)
+        if request.method.lower() == 'delete':
+            try:
+                for field in fields_to_update:
+                    if field in data:
+                        current_values = getattr(cv, field, [])
+                        values_after_delete = [item for item in current_values if item not in data[field]]
+                        setattr(cv, field, values_after_delete)
+                cv.save()
+            except Exception as e:
+                return self.create_response(request, {'error': str(e)}, HttpBadRequest)
 
-                    updated_values = current_values + data[field]
-                    setattr(cv, field, updated_values)  # Set the new data
-            cv.save()
-        except Exception as e:
-            return self.create_response(request, {'error': str(e)}, HttpBadRequest)
+        if request.method.lower() == 'patch':
+            if action == 'add':
+                try:
+                    for field, values in data.items():
+                        if field in fields_to_update and isinstance(values, list):
+                            current_values = getattr(cv, field, [])
+                            setattr(cv, field, current_values + values)
+                    cv.save()
+                    return self.create_response(request, {'success': 'Entries added successfully'}, HttpAccepted)
+                except Exception as e:
+                    return self.create_response(request, {'error': str(e)}, HttpBadRequest)
+            elif action == 'edit':
+                try:
+                    for field, details in data.items():
+                        if field in fields_to_update and isinstance(details, dict):
+                            old_value = details.get('oldValue')
+                            new_value = details.get('newValue')
+                            current_values = getattr(cv, field, [])
+                            if old_value in current_values:
+                                index = current_values.index(old_value)
+                                current_values[index] = new_value
+                            setattr(cv, field, current_values)
+                    cv.save()
+                    return self.create_response(request, {'success': 'Entries updated successfully'}, HttpAccepted)
+                except Exception as e:
+                    return self.create_response(request, {'error': str(e)}, HttpBadRequest)
 
-        return self.create_response(request, {'success': 'User CV updated successfully'}, HttpAccepted)
-
-
-
+        if request.method.lower() == 'patch':
+            return self.create_response(request, {'success': 'User CV updated successfully'}, HttpAccepted)
+        elif request.method.lower() == 'delete':
+            return self.create_response(request, {'success': 'User CV entries deleted successfully'}, HttpAccepted)
