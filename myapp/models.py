@@ -39,23 +39,35 @@ class UserCV(models.Model):
 class JobOffers(models.Model):
     job_description = models.TextField()
     salary = models.DecimalField(max_digits=10, decimal_places=2)
-    requirements = models.TextField()
+    requirements = ArrayField(models.TextField(), blank=True, default=list)
     location = models.CharField(max_length=100)
     job_position = models.TextField(default="default")
     job_category = models.TextField(default="General")
+    company = models.ForeignKey(
+        'CompanyDetails',
+        on_delete=models.CASCADE,
+        related_name='job_offers',
+        null=True,
+        blank=True
+    )
 
     class Meta:
         db_table = 'job_offers_table'
 
 
 class CompanyDetails(models.Model):
-    user = models.OneToOneField(UserLogin, on_delete=models.CASCADE)
-    company_name = models.CharField(max_length=100)
-    address = models.CharField(max_length=100)
-    email = models.EmailField()
-    phone = models.CharField(max_length=100)
-    description = models.TextField()
-    job_offers = models.ManyToManyField(JobOffers, related_name='companies')
+    user = models.OneToOneField(UserLogin, on_delete=models.CASCADE, related_name='company_profile')
+    company_name = models.CharField(max_length=100, null=True, blank=True)
+    address = models.CharField(max_length=100, null=True, blank=True)
+    contact_email = models.EmailField(null=True, blank=True)
+    phone = models.CharField(max_length=100, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
 
     class Meta:
         db_table = 'company_details_table'
+
+    @classmethod
+    def get_field_name(cls):
+        return [field.name for field in cls._meta.get_fields()
+                if field.concrete and not field.many_to_many and not field.auto_created]
+
