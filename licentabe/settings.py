@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'myapp',
     'drf_yasg',
     'tastypie',
+    'pgvector'
 ]
 
 MIDDLEWARE = [
@@ -85,7 +86,7 @@ DATABASES = {
         'NAME': 'licentadb',
         'USER': 'licentauser',
         'PASSWORD': 'password',
-        'HOST': '172.18.0.2',
+        'HOST': 'localhost',
         'PORT': '5432',  # Set to empty string for default
     }
 }
@@ -139,6 +140,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 #     'disable_existing_loggers': False,
 #     'handlers': {
 #         'console': {
+#             'level': 'DEBUG',
 #             'class': 'logging.StreamHandler',
 #         },
 #     },
@@ -147,10 +149,10 @@ CORS_ORIGIN_ALLOW_ALL = True
 #             'handlers': ['console'],
 #             'level': 'DEBUG',
 #         },
-#         'django.request': {
+#         'myapp': {  # Replace 'myapp' with the name of your Django app
 #             'handlers': ['console'],
 #             'level': 'DEBUG',
-#             'propagate': False,
+#             'propagate': True,
 #         },
 #     },
 # }

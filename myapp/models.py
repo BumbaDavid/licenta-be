@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.postgres.fields import ArrayField
+from pgvector.django import VectorField
 
 
 class UserLogin(AbstractUser):
@@ -51,8 +52,26 @@ class JobOffers(models.Model):
         blank=True
     )
 
+    applicants = models.ManyToManyField(UserLogin, through='JobApplication', related_name='applied_jobs')
+
+    description_vector = VectorField(dimensions=300, default=[0.0] * 300)
+    requirements_vector = VectorField(dimensions=300, default=[0.0] * 300)
+    location_vector = VectorField(dimensions=300, default=[0.0] * 300)
+    job_position_vector = VectorField(dimensions=300, default=[0.0] * 300)
+    job_category_vector = VectorField(dimensions=300, default=[0.0] * 300)
+
     class Meta:
         db_table = 'job_offers_table'
+
+
+class JobApplication(models.Model):
+    user = models.ForeignKey(UserLogin, on_delete=models.CASCADE)
+    job_offer = models.ForeignKey(JobOffers, on_delete=models.CASCADE)
+    application_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table= 'job_application_table'
+        unique_together = ('user', 'job_offer')
 
 
 class CompanyDetails(models.Model):

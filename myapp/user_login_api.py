@@ -6,7 +6,8 @@ from tastypie.exceptions import NotFound, BadRequest
 from tastypie.http import HttpUnauthorized, HttpForbidden, HttpNoContent, HttpBadRequest, HttpAccepted
 from tastypie.models import ApiKey
 from tastypie.resources import ModelResource
-
+from django.contrib.auth.models import Group
+from tastypie.authorization import Authorization
 from myapp.models import UserProfile, CompanyDetails
 
 UserLogin = get_user_model()
@@ -20,18 +21,14 @@ class UserLoginResource(ModelResource):
         resource_name = 'userLogin'
         allowed_methods = ['get', 'post', 'put', 'delete']
         always_return_data = True
-        field = ['username', 'email', 'first_name', 'last_name']
+        authorization = Authorization()
 
     def obj_create(self, bundle, **kwargs):
-        bundle.obj = UserLogin()
-        bundle.obj.username = bundle.data.get('username')
-        bundle.obj.email = bundle.data.get('email')
-        bundle.obj.first_name = bundle.data.get('first_name')
-        bundle.obj.last_name = bundle.data.get('last_name')
-        bundle.obj.account_type = bundle.data.get('account_type')
-        bundle.obj.set_password(bundle.data.get('password'))
-        bundle.obj.save()
+        bundle = super(UserLoginResource, self).obj_create(bundle, **kwargs)
         account_type = bundle.data.get('account_type')
+        bundle.obj.set_password(bundle.data.get('password'))
+
+        bundle.obj.save()
         if account_type == "normal":
             user_profile = UserProfile(
                 user=bundle.obj,
@@ -40,17 +37,32 @@ class UserLoginResource(ModelResource):
                 age="",
             )
             user_profile.save()
+
+            user_profile_group = Group.objects.get(name='UserProfile')
+            bundle.obj.groups.add(user_profile_group)
+            user_cv_group = Group.objects.get(name='UserCV')
+            bundle.obj.groups.add(user_cv_group)
+            job_application_group = Group.objects.get(name='JobApplication')
+            bundle.obj.groups.add(job_application_group)
+
         elif account_type == "company":
+            company_details_group = Group.objects.get(name="CompanyDetails")
+            bundle.obj.groups.add(company_details_group)
+            job_offers_group = Group.objects.get(name="JobOffers")
+            bundle.obj.groups.add(job_offers_group)
+            bundle.obj.save()
+
             company_profile = CompanyDetails(
                 user=bundle.obj,
                 company_name="",
                 address="",
-                email="",
+                contact_email="",
                 phone="",
                 description=""
             )
             company_profile.save()
 
+        bundle.obj.save()
         return bundle
 
     def obj_delete(self, bundle, **kwargs):
@@ -78,8 +90,11 @@ class UserLoginResource(ModelResource):
         self.method_check(request, allowed=['post'])
         data = self.deserialize(request, request.body, format=request.META.get('CONTENT_TYPE', 'application/json'))
         username = data.get('username', '')
+        print("username ", username)
         password = data.get('password', '')
+        print("password", password)
         user = authenticate(username=username, password=password)
+        print("here is the user : ", user)
         if user:
             if user.is_active:
                 api_key, created = ApiKey.objects.get_or_create(user=user)

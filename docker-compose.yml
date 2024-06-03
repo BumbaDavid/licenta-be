@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:latest
+    image: ankane/pgvector
     container_name: postgres
     environment:
       POSTGRES_USER: licentauser
