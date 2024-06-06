@@ -626,26 +626,8 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 --
 
 COPY public.company_details_table (id, company_name, address, contact_email, phone, description, user_id) FROM stdin;
-20	TechSolutions			0771234794	TechSolutions este specializată în furnizarea de soluții software inovatoare companiilor din întreaga lume. Echipa noastră de experți excelează în dezvoltarea de aplicații personalizate, asigurând o integrare perfectă și sporind eficiența operațională.	35
-21	NextGenApps			0722965213	NextGenApps este în fruntea dezvoltării de aplicații mobile, creând aplicații de ultimă oră care redefinesc experiența utilizatorului. Accentul nostru este pe furnizarea de aplicații de înaltă calitate, scalabile și intuitive pentru diverse industrii.	36
-36	RetailWorld			0771231964	RetailWorld este o companie lider de retail care oferă o gamă largă de produse la prețuri competitive. Angajamentul nostru este de a oferi un serviciu excelent pentru clienți și o experiență de cumpărături perfectă.	52
-22	Cybernetics			0734271089	Cybernetics oferă servicii avansate de securitate cibernetică pentru a proteja companiile de amenințările digitale. Soluțiile noastre includ detectarea amenințărilor, răspunsul la incident și evaluări complete de securitate pentru a vă proteja datele.	37
-23	AITech			0771456000	AITech este lider în soluții de inteligență artificială și învățare automată. Ajutăm companiile să valorifice puterea inteligenței artificiale pentru a stimula inovația, a îmbunătăți procesul decizional și a automatiza procesele.	38
-24	GreenFields			0744666444	GreenFields este dedicat agriculturii durabile, oferind soluții agricole ecologice și produse ecologice. Misiunea noastră este să promovăm o viață sănătoasă prin practici agricole durabile.	40
-37	ShopSmart			0713297004	ShopSmart este o companie inovatoare de retail, axată pe soluții inteligente de cumpărături. Oferim experiențe de cumpărături personalizate și oferte excelente la o varietate de produse.	53
-25	AgriCo			0771434786	AgriCo este specializată în tehnologie și inovare agricolă, oferind soluții care sporesc randamentul culturilor și productivitatea fermei. Produsele și serviciile noastre sunt concepute pentru a susține nevoile agricole moderne.	41
-26	HarvestHub			0711123942	HarvestHub conectează fermierii cu consumatorii, asigurând produse proaspete și din surse locale. Sprijinim fermele mici, oferind o platformă pentru a ajunge la o piață mai largă, promovând agricultura durabilă.	42
-27	AgriVentures			0722597610	AgriVentures se concentrează pe cercetarea și dezvoltarea agricolă, creând soluții inovatoare pentru îmbunătățirea practicilor agricole. Scopul nostru este să promovăm agricultura prin știință și tehnologie.	43
-28	LearnQuest			0732023596	LearnQuest oferă programe educaționale cuprinzătoare și resurse pentru studenții de toate vârstele. Misiunea noastră este să promovăm învățarea pe tot parcursul vieții prin conținut educațional antrenant și accesibil.	44
-29	EduPride			0723123602	EduPride oferă cursuri online și programe de formare pentru dezvoltare profesională. Ne angajăm să ajutăm oamenii să-și atingă obiectivele de carieră prin educație de înaltă calitate și dezvoltarea abilităților.	45
-30	KnowledgeTree			0723912543	KnowledgeTree este o platformă educațională care oferă o gamă largă de cursuri și resurse de învățare. Accentul nostru este să facem educația accesibilă și plăcută pentru toată lumea.	46
-31	AcademicSolutions			0726110993	AcademicSolutions colaborează cu școli și instituții pentru a oferi soluții educaționale personalizate. Serviciile noastre includ dezvoltarea de curriculum, formarea profesorilor și programe de sprijin pentru elevi.	47
-32	BizVentures			0729123067	BizVentures helps startups and small businesses grow through strategic consulting and investment. Our team provides expert advice on business development, marketing, and financial planning.\n\n	48
-33	EnterpriseCorp			0739231923	EnterpriseCorp oferă companiilor mari soluții de afaceri complete, inclusiv optimizarea proceselor, servicii IT și consultanță în strategie corporativă. Ajutăm companiile să atingă excelența operațională.	49
-34	BusinessHub			0748777124	BusinessHub este o soluție unică pentru toate nevoile afacerii dvs., oferind servicii precum analiză de piață, planificare financiară și consultanță în afaceri. Scopul nostru este să ajutăm companiile să prospere pe o piață competitivă.	50
-35	ProfitPartners			0798123993	ProfitPartners este specializată în consultanță financiară și servicii de investiții pentru afaceri. Oferim perspective și strategii pentru a maximiza profitabilitatea și a asigura o creștere durabilă.	51
-38	StoreWise			0798295307	StoreWise oferă o experiență unică de cumpărături cu o selecție curată de produse. Magazinele noastre sunt concepute pentru a oferi o experiență de cumpărături convenabilă și plăcută tuturor clienților.	54
-39	RetailPlus			0720912541	RetailPlus este o companie de retail care se concentrează pe furnizarea de produse de înaltă calitate și servicii excepționale pentru clienți. Magazinele noastre oferă o gamă largă de articole, de la produse alimentare la produse electronice.	55
+40						57
+41						58
 \.
 
 
@@ -654,35 +636,6 @@ COPY public.company_details_table (id, company_name, address, contact_email, pho
 --
 
 COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
-1	2024-06-03 10:41:04.054171+00	1	CompanyDetails	1	[{"added": {}}]	3	1
-2	2024-06-03 10:41:36.163696+00	2	JobApplication	1	[{"added": {}}]	3	1
-3	2024-06-03 10:42:00.445323+00	3	JobOffers	1	[{"added": {}}]	3	1
-4	2024-06-03 10:42:23.774855+00	4	UserCV	1	[{"added": {}}]	3	1
-5	2024-06-03 10:42:45.281546+00	5	UserProfile	1	[{"added": {}}]	3	1
-6	2024-06-03 12:01:56.277399+00	14	techsolutions	2	[{"changed": {"fields": ["Groups"]}}]	7	1
-7	2024-06-03 12:20:19.506631+00	14	techsolutions	2	[{"changed": {"fields": ["User permissions"]}}]	7	1
-8	2024-06-03 12:41:13.356066+00	25	academicsolutions	3		7	1
-9	2024-06-03 12:41:13.357223+00	19	agrico	3		7	1
-10	2024-06-03 12:41:13.357944+00	21	agriventures	3		7	1
-11	2024-06-03 12:41:13.358605+00	17	aitech	3		7	1
-12	2024-06-03 12:41:13.359259+00	26	bizventures	3		7	1
-13	2024-06-03 12:41:13.359905+00	28	businesshub	3		7	1
-14	2024-06-03 12:41:13.36056+00	16	cybernetics	3		7	1
-15	2024-06-03 12:41:13.361202+00	34	DavidBMB	3		7	1
-16	2024-06-03 12:41:13.361822+00	23	edupride	3		7	1
-17	2024-06-03 12:41:13.362445+00	27	enterprisecorp	3		7	1
-18	2024-06-03 12:41:13.363066+00	18	greenfields	3		7	1
-19	2024-06-03 12:41:13.363675+00	20	harvesthub	3		7	1
-20	2024-06-03 12:41:13.364297+00	24	knowledgetree	3		7	1
-21	2024-06-03 12:41:13.364942+00	22	learnquest	3		7	1
-22	2024-06-03 12:41:13.365653+00	15	nextgenapps	3		7	1
-23	2024-06-03 12:41:13.366284+00	29	profitpartners	3		7	1
-24	2024-06-03 12:41:13.366889+00	33	retailplus	3		7	1
-25	2024-06-03 12:41:13.367502+00	30	retailworld	3		7	1
-26	2024-06-03 12:41:13.368116+00	31	shopsmart	3		7	1
-27	2024-06-03 12:41:13.368738+00	32	storewise	3		7	1
-28	2024-06-03 12:41:13.369359+00	14	techsolutions	3		7	1
-29	2024-06-03 12:47:10.728689+00	39		3		7	1
 \.
 
 
@@ -712,46 +665,46 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 --
 
 COPY public.django_migrations (id, app, name, applied) FROM stdin;
-1	contenttypes	0001_initial	2024-05-31 11:28:53.235346+00
-2	contenttypes	0002_remove_content_type_name	2024-05-31 11:28:53.238941+00
-3	auth	0001_initial	2024-05-31 11:28:53.256599+00
-4	auth	0002_alter_permission_name_max_length	2024-05-31 11:28:53.259406+00
-5	auth	0003_alter_user_email_max_length	2024-05-31 11:28:53.262579+00
-6	auth	0004_alter_user_username_opts	2024-05-31 11:28:53.26602+00
-7	auth	0005_alter_user_last_login_null	2024-05-31 11:28:53.269787+00
-8	auth	0006_require_contenttypes_0002	2024-05-31 11:28:53.270602+00
-9	auth	0007_alter_validators_add_error_messages	2024-05-31 11:28:53.27369+00
-10	auth	0008_alter_user_username_max_length	2024-05-31 11:28:53.27599+00
-11	auth	0009_alter_user_last_name_max_length	2024-05-31 11:28:53.278291+00
-12	auth	0010_alter_group_name_max_length	2024-05-31 11:28:53.280901+00
-13	auth	0011_update_proxy_permissions	2024-05-31 11:28:53.283169+00
-14	auth	0012_alter_user_first_name_max_length	2024-05-31 11:28:53.285759+00
-15	myapp	0001_initial	2024-05-31 11:28:53.338129+00
-16	admin	0001_initial	2024-05-31 11:28:53.352007+00
-17	admin	0002_logentry_remove_auto_add	2024-05-31 11:28:53.357962+00
-18	admin	0003_logentry_add_action_flag_choices	2024-05-31 11:28:53.364116+00
-19	myapp	0017_enable_pg_vector	2024-05-31 11:28:53.365634+00
-20	myapp	0002_alter_userlogin_options_alter_companydetails_table_and_more	2024-05-31 11:28:53.385296+00
-21	myapp	0003_remove_userprofile_email_remove_userprofile_name_and_more	2024-05-31 11:28:53.39945+00
-22	myapp	0004_joboffers_job_category_joboffers_job_position	2024-05-31 11:28:53.403753+00
-23	myapp	0005_remove_userprofile_gender	2024-05-31 11:28:53.408317+00
-24	myapp	0006_alter_userprofile_address_and_more	2024-05-31 11:28:53.425049+00
-25	myapp	0007_remove_userprofile_date_of_birth_userprofile_age	2024-05-31 11:28:53.433375+00
-26	myapp	0008_remove_usercv_user_profile_usercv_user_cv_and_more	2024-05-31 11:28:53.474559+00
-27	myapp	0009_rename_user_cv_usercv_user	2024-05-31 11:28:53.481584+00
-28	myapp	0010_alter_usercv_abilities_alter_usercv_experience_and_more	2024-05-31 11:28:53.482274+00
-29	myapp	0011_alter_usercv_abilities_alter_usercv_experience_and_more	2024-05-31 11:28:53.54285+00
-30	myapp	0012_wrap_text_in_array	2024-05-31 11:28:53.550803+00
-31	myapp	0013_remove_companydetails_job_offers_joboffers_company_and_more	2024-05-31 11:28:53.587259+00
-32	myapp	0014_rename_email_companydetails_contact_email	2024-05-31 11:28:53.591805+00
-33	myapp	0015_alter_joboffers_requirements	2024-05-31 11:28:53.598408+00
-34	myapp	0016_jobapplication_joboffers_applicants	2024-05-31 11:28:53.615769+00
-35	myapp	0018_merge	2024-05-31 11:28:53.61652+00
-36	myapp	0019_joboffers_description_vector_and_more	2024-05-31 11:28:53.641282+00
-37	sessions	0001_initial	2024-05-31 11:28:53.647795+00
-38	tastypie	0001_initial	2024-05-31 11:28:53.666457+00
-39	tastypie	0002_api_access_url_length	2024-05-31 11:28:53.668072+00
-40	tastypie	0003_alter_apiaccess_id_alter_apikey_id	2024-05-31 11:28:53.684388+00
+1	contenttypes	0001_initial	2024-06-04 09:16:24.516784+00
+2	contenttypes	0002_remove_content_type_name	2024-06-04 09:16:24.523943+00
+3	auth	0001_initial	2024-06-04 09:16:24.567693+00
+4	auth	0002_alter_permission_name_max_length	2024-06-04 09:16:24.574865+00
+5	auth	0003_alter_user_email_max_length	2024-06-04 09:16:24.579989+00
+6	auth	0004_alter_user_username_opts	2024-06-04 09:16:24.586826+00
+7	auth	0005_alter_user_last_login_null	2024-06-04 09:16:24.59809+00
+8	auth	0006_require_contenttypes_0002	2024-06-04 09:16:24.601159+00
+9	auth	0007_alter_validators_add_error_messages	2024-06-04 09:16:24.608016+00
+10	auth	0008_alter_user_username_max_length	2024-06-04 09:16:24.615461+00
+11	auth	0009_alter_user_last_name_max_length	2024-06-04 09:16:24.624642+00
+12	auth	0010_alter_group_name_max_length	2024-06-04 09:16:24.631654+00
+13	auth	0011_update_proxy_permissions	2024-06-04 09:16:24.639333+00
+14	auth	0012_alter_user_first_name_max_length	2024-06-04 09:16:24.645708+00
+15	myapp	0001_initial	2024-06-04 09:16:24.802751+00
+16	admin	0001_initial	2024-06-04 09:16:24.835373+00
+17	admin	0002_logentry_remove_auto_add	2024-06-04 09:16:24.844385+00
+18	admin	0003_logentry_add_action_flag_choices	2024-06-04 09:16:24.856644+00
+19	myapp	0017_enable_pg_vector	2024-06-04 09:16:24.869043+00
+20	myapp	0002_alter_userlogin_options_alter_companydetails_table_and_more	2024-06-04 09:16:24.920662+00
+21	myapp	0003_remove_userprofile_email_remove_userprofile_name_and_more	2024-06-04 09:16:24.953351+00
+22	myapp	0004_joboffers_job_category_joboffers_job_position	2024-06-04 09:16:24.965377+00
+23	myapp	0005_remove_userprofile_gender	2024-06-04 09:16:24.978399+00
+24	myapp	0006_alter_userprofile_address_and_more	2024-06-04 09:16:25.013177+00
+25	myapp	0007_remove_userprofile_date_of_birth_userprofile_age	2024-06-04 09:16:25.033284+00
+26	myapp	0008_remove_usercv_user_profile_usercv_user_cv_and_more	2024-06-04 09:16:25.15567+00
+27	myapp	0009_rename_user_cv_usercv_user	2024-06-04 09:16:25.171295+00
+28	myapp	0010_alter_usercv_abilities_alter_usercv_experience_and_more	2024-06-04 09:16:25.173722+00
+29	myapp	0011_alter_usercv_abilities_alter_usercv_experience_and_more	2024-06-04 09:16:25.293081+00
+30	myapp	0012_wrap_text_in_array	2024-06-04 09:16:25.306575+00
+31	myapp	0013_remove_companydetails_job_offers_joboffers_company_and_more	2024-06-04 09:16:25.383825+00
+32	myapp	0014_rename_email_companydetails_contact_email	2024-06-04 09:16:25.393951+00
+33	myapp	0015_alter_joboffers_requirements	2024-06-04 09:16:25.413468+00
+34	myapp	0016_jobapplication_joboffers_applicants	2024-06-04 09:16:25.461815+00
+35	myapp	0018_merge	2024-06-04 09:16:25.46811+00
+36	myapp	0019_joboffers_description_vector_and_more	2024-06-04 09:16:25.54041+00
+37	sessions	0001_initial	2024-06-04 09:16:25.56045+00
+38	tastypie	0001_initial	2024-06-04 09:16:25.605659+00
+39	tastypie	0002_api_access_url_length	2024-06-04 09:16:25.614699+00
+40	tastypie	0003_alter_apiaccess_id_alter_apikey_id	2024-06-04 09:16:25.654207+00
 \.
 
 
@@ -761,6 +714,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 
 COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
 2b9z1kztotzz077grhwr765eaxzqes59	.eJxVjMsOwiAQRf-FtSE8SmVcuu83EGYGpGogKe3K-O_apAvd3nPOfYkQt7WEraclzCwuQovT74aRHqnugO-x3pqkVtdlRrkr8qBdTo3T83q4fwcl9vKtlcLBZG2RCJRFyKO3mLWKCdE7AKfBxZGtN6wVeZ9IkcsA9gyDIzbi_QHexzeo:1sE56T:VHwkSHJo9XsKLPAkFLYT0KLwm32XOX4oEbBAnmZVw8g	2024-06-17 10:39:49.49779+00
+wwgj98jxb1nnkyprx0ze4p579hn4qu6e	.eJxVjMsOwiAQRf-FtSE8SmVcuu83EGYGpGogKe3K-O_apAvd3nPOfYkQt7WEraclzCwuQovT74aRHqnugO-x3pqkVtdlRrkr8qBdTo3T83q4fwcl9vKtlcLBZG2RCJRFyKO3mLWKCdE7AKfBxZGtN6wVeZ9IkcsA9gyDIzbi_QHexzeo:1sETeJ:SRQPSaQiTGvkl-xkwS8D3B1Sp_bfq_CiZAhg8P4pLZo	2024-06-18 12:52:23.07214+00
 \.
 
 
@@ -793,7 +747,8 @@ COPY public.tastypie_apiaccess (id, identifier, url, request_method, accessed) F
 --
 
 COPY public.tastypie_apikey (id, key, created, user_id) FROM stdin;
-23	82de80805bc92eec4bc2398f7d9863458b8e5d97	2024-06-03 14:18:26.726513+00	55
+25	18a354c19fbdd2a443d34150664df2428bcc63fe	2024-06-04 12:49:25.202992+00	57
+37	864f41908820460f794dbb4596fd19af37005341	2024-06-05 10:00:32.315435+00	12
 \.
 
 
@@ -802,6 +757,16 @@ COPY public.tastypie_apikey (id, key, created, user_id) FROM stdin;
 --
 
 COPY public.user_cv_table (id, studies, experience, abilities, languages, hobbies, user_id) FROM stdin;
+2	{}	{}	{asd}	{}	{}	4
+1	{studie1}	{experience1}	{ability1,hello}	{language2}	{hobby1}	3
+3	{}	{}	{}	{}	{}	5
+4	{}	{}	{}	{}	{}	6
+5	{}	{}	{}	{}	{}	7
+6	{}	{}	{}	{}	{}	8
+7	{}	{}	{}	{}	{}	9
+8	{}	{}	{}	{}	{}	10
+9	{}	{}	{}	{}	{}	11
+10	{}	{}	{}	{}	{}	12
 \.
 
 
@@ -810,18 +775,10 @@ COPY public.user_cv_table (id, studies, experience, abilities, languages, hobbie
 --
 
 COPY public.user_login_table (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined, account_type) FROM stdin;
-1	pbkdf2_sha256$720000$qzJSOkleyvlsvy8WbUyNf5$op6PpyKFw+FrX4LqBy/5oakQ4fCpLZyH9FIP68wGN68=	2024-06-03 10:39:49.495372+00	t	admin			admin@example.com	t	t	2024-06-03 10:37:59.067918+00	
 2	pbkdf2_sha256$720000$BrDZ4PGssjQs0JsvYoxOzi$3Pk2dM05E8MlQ+V0ZII+Y25OH7c/QP5q1FvMiJYGwb4=	\N	f	David	Bumba	David	david@email.com	f	t	2024-06-03 11:06:14.32993+00	normal
-3	pbkdf2_sha256$720000$aIKyH5PQgJbfOIMnZqy6Km$9F1cy3+865XBlmRHpuJqFZ03JmbasQKAKa5UB5MQ23o=	\N	f	skywalker77	Luke	Skywalker	skywalker77@example.com	f	t	2024-06-03 11:13:56.690173+00	normal
 4	pbkdf2_sha256$720000$nLlZSWztv3vsX8m5GN7h5q$svF7shPdgx/jev8zFbJlu6obYljLCKDTwpvZfx9I+bQ=	\N	f	oceanbreeze88	Maya	Johnson	oceanbreeze88@example.com	f	t	2024-06-03 11:14:04.686864+00	normal
 5	pbkdf2_sha256$720000$5swC5kP5nmAdk4zpZfDLcF$RXsya8/MD8qMCmMon7XoZhl6vYLKJ58HpqX2R6kYxU8=	\N	f	forestwhisper22	Ethan	Clark	forestwhisper22@example.com	f	t	2024-06-03 11:14:15.846483+00	normal
-6	pbkdf2_sha256$720000$q3nyiPEoCqCfESGuIp6ukW$ZcZOeN5X/d7lQjZ6ZpHmB4e02wU1f0KXFwqFmdIVKA4=	\N	f	mountainpeak99	Ava	Miller	mountainpeak99@example.com	f	t	2024-06-03 11:14:26.102998+00	normal
-7	pbkdf2_sha256$720000$qy5YfFppLPpwFMefy5s9Ef$DAqErwKHj6zQ8SE3Xbc1wqr0Ix/sh545BVLDwjfD1Kk=	\N	f	sunsetglow55	Liam	Davis	sunsetglow55@example.com	f	t	2024-06-03 11:14:37.141751+00	normal
-8	pbkdf2_sha256$720000$vn6DmilnpOkdcrl6Zw9GhU$C9cRozhKqjOejV7vurGWTYjLrP37uwS4D+DbryVf2EE=	\N	f	starlight88	Sophia	Garcia	starlight88@example.com	f	t	2024-06-03 11:14:45.781092+00	normal
-9	pbkdf2_sha256$720000$AMYSD5DDB9ZLGxQU47KplK$Pe4IPVcX9cjwncfyqzqvjs8eXXy1Bd3oULlHz6nWMGM=	\N	f	riverflow33	Noah	Martinez	riverflow33@example.com	f	t	2024-06-03 11:14:52.712691+00	normal
 10	pbkdf2_sha256$720000$fzvb89U9WJrU71dU4b0N6c$A833vY433XxqL+Bv4eqMamNaNlDd8oEGm/mZIobJ4eo=	\N	f	desertrose66	Isabella	Rodriguez	desertrose66@example.com	f	t	2024-06-03 11:14:59.621252+00	normal
-11	pbkdf2_sha256$720000$0hNNhSJsfTilnrWCxmCE4P$0Vlln/8d3XG46F3yFyxzO+WlYSIRoe1MLJuL6EWQUQg=	\N	f	midnightowl44	James	Hernandez	midnightowl44@example.com	f	t	2024-06-03 11:15:06.472557+00	normal
-12	pbkdf2_sha256$720000$zWINaajLq4bXovK5ec1FCH$hx2yjb7SIWZR9YFyIq3rAPdKzzFm3a+AjXoMp2mRhkY=	\N	f	rainbowdash77	Emily	Lopez	rainbowdash77@example.com	f	t	2024-06-03 11:15:12.738106+00	normal
 35	pbkdf2_sha256$720000$tlNDH4YFy4h6y4phq0spch$Th7+NKGw3Quecu334VtUOFioDxOlE2/HPGMr7lmid2A=	\N	f	techsolutions			info@techsolutions.com	f	t	2024-06-03 12:41:57.839538+00	company
 43	pbkdf2_sha256$720000$hb5V03EqXfzcVSIuX6O43W$2Zuyt2qh8rQfs7n9Enb78ntSWarukFs7O6CN/Wa77lc=	\N	f	agriventures			info@agriventures.com	f	t	2024-06-03 12:44:10.694709+00	company
 48	pbkdf2_sha256$720000$T6GzVOa7OyeXkvrMSGgcnd$rhgCsF5/nqBYSt5uDJnyRvLwjPJPqXflw3musDubkLo=	\N	f	bizventures			contact@bizventures.com	f	t	2024-06-03 12:44:49.96276+00	company
@@ -842,6 +799,17 @@ COPY public.user_login_table (id, password, last_login, is_superuser, username, 
 41	pbkdf2_sha256$720000$XXifvTL5e1l6jg9INk6Lvx$wlcNEPhnJTzDAEGiBrQFmhnQSQsFujNudRZBdOsVR5E=	\N	f	agrico			info@agrico.com	f	t	2024-06-03 12:44:00.977302+00	company
 37	pbkdf2_sha256$720000$NtlVPZixtesLgRYGDzxugq$uVRy/BZgsLoGE00NCv/tZHf3VOTuCqtSt27xBpW2xJ8=	\N	f	cybernetics			support@cybernetics.com	f	t	2024-06-03 12:43:07.759718+00	company
 42	pbkdf2_sha256$720000$IuqNUehazNTY0W3v9dVE18$qID5UwYRHPFzaWGKP6sPsoMULnfIUkutK4IO/km5hWI=	\N	f	harvesthub			support@harvesthub.com	f	t	2024-06-03 12:44:05.767259+00	company
+1	pbkdf2_sha256$720000$qzJSOkleyvlsvy8WbUyNf5$op6PpyKFw+FrX4LqBy/5oakQ4fCpLZyH9FIP68wGN68=	2024-06-04 12:52:23.069319+00	t	admin			admin@example.com	t	t	2024-06-03 10:37:59.067918+00	
+56	pbkdf2_sha256$720000$NSaZMYgRhcXzWyf7C8lkt4$NaLveUYHz2Xl5sRNJyBShKi/pe3EUvpkHydoEKToT+4=	\N	f	viaductus	Rares	Stanca	rares.stanca@email.com	f	t	2024-06-04 12:41:04.395188+00	user
+3	pbkdf2_sha256$720000$aIKyH5PQgJbfOIMnZqy6Km$9F1cy3+865XBlmRHpuJqFZ03JmbasQKAKa5UB5MQ23o=	\N	f	skywalker77	Luke	Skywalker	skywalker77@example.com	f	t	2024-06-03 11:13:56.690173+00	normal
+57	pbkdf2_sha256$720000$oHFpam0rlHBoW4n4UUIw2P$d2rY6fKbbM6cAhEYt/FO/v/1HKfgbgy6WyFxNxd0/vU=	\N	f	kendra			kendra@group.com	f	t	2024-06-04 12:49:24.116816+00	company
+6	pbkdf2_sha256$720000$q3nyiPEoCqCfESGuIp6ukW$ZcZOeN5X/d7lQjZ6ZpHmB4e02wU1f0KXFwqFmdIVKA4=	\N	f	mountainpeak99	Ava	Miller	mountainpeak99@example.com	f	t	2024-06-03 11:14:26.102998+00	normal
+58	pbkdf2_sha256$720000$v8ton9ZWBcalW22aL4u4Xg$kVaTMlaCi2NjbyAVnImvgVRwzv3mUy1Tm/QApUx13CY=	\N	f	karina			karina@bumba.email	f	t	2024-06-04 12:58:49.059462+00	company
+7	pbkdf2_sha256$720000$qy5YfFppLPpwFMefy5s9Ef$DAqErwKHj6zQ8SE3Xbc1wqr0Ix/sh545BVLDwjfD1Kk=	\N	f	sunsetglow55	Liam	Davis	sunsetglow55@example.com	f	t	2024-06-03 11:14:37.141751+00	normal
+8	pbkdf2_sha256$720000$vn6DmilnpOkdcrl6Zw9GhU$C9cRozhKqjOejV7vurGWTYjLrP37uwS4D+DbryVf2EE=	\N	f	starlight88	Sophia	Garcia	starlight88@example.com	f	t	2024-06-03 11:14:45.781092+00	normal
+9	pbkdf2_sha256$720000$AMYSD5DDB9ZLGxQU47KplK$Pe4IPVcX9cjwncfyqzqvjs8eXXy1Bd3oULlHz6nWMGM=	\N	f	riverflow33	Noah	Martinez	riverflow33@example.com	f	t	2024-06-03 11:14:52.712691+00	normal
+11	pbkdf2_sha256$720000$0hNNhSJsfTilnrWCxmCE4P$0Vlln/8d3XG46F3yFyxzO+WlYSIRoe1MLJuL6EWQUQg=	\N	f	midnightowl44	James	Hernandez	midnightowl44@example.com	f	t	2024-06-03 11:15:06.472557+00	normal
+12	pbkdf2_sha256$720000$zWINaajLq4bXovK5ec1FCH$hx2yjb7SIWZR9YFyIq3rAPdKzzFm3a+AjXoMp2mRhkY=	\N	f	rainbowdash77	Emily	Lopez	rainbowdash77@example.com	f	t	2024-06-03 11:15:12.738106+00	normal
 \.
 
 
@@ -923,6 +891,10 @@ COPY public.user_login_table_groups (id, userlogin_id, group_id) FROM stdin;
 114	54	3
 115	55	1
 116	55	3
+117	57	1
+118	57	3
+119	58	1
+120	58	3
 \.
 
 
@@ -940,16 +912,16 @@ COPY public.user_login_table_user_permissions (id, userlogin_id, permission_id) 
 
 COPY public.user_profile_table (id, address, phone_number, user_id, age) FROM stdin;
 1			2	
-2			3	
 3			4	
 4			5	
-5			6	
-6			7	
-7			8	
-8			9	
 9			10	
-10			11	
-11			12	
+2	Timisoara	0731292012	3	22
+5	Oradea	0722991823	6	25
+6	Bucuresti	0798231567	7	30
+7	Cluj-Napoca	0723901992	8	24
+8	Iasi	0788231994	9	26
+10	Constanta	0722549014	11	28
+11	Sibiu	0756923568	12	23
 \.
 
 
@@ -1006,7 +978,7 @@ SELECT pg_catalog.setval('public.job_application_table_id_seq', 1, false);
 -- Name: myapp_companydetails_id_seq; Type: SEQUENCE SET; Schema: public; Owner: licentauser
 --
 
-SELECT pg_catalog.setval('public.myapp_companydetails_id_seq', 39, true);
+SELECT pg_catalog.setval('public.myapp_companydetails_id_seq', 41, true);
 
 
 --
@@ -1020,21 +992,21 @@ SELECT pg_catalog.setval('public.myapp_joboffers_id_seq', 1, false);
 -- Name: myapp_usercv_id_seq; Type: SEQUENCE SET; Schema: public; Owner: licentauser
 --
 
-SELECT pg_catalog.setval('public.myapp_usercv_id_seq', 1, false);
+SELECT pg_catalog.setval('public.myapp_usercv_id_seq', 10, true);
 
 
 --
 -- Name: myapp_userlogin_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: licentauser
 --
 
-SELECT pg_catalog.setval('public.myapp_userlogin_groups_id_seq', 116, true);
+SELECT pg_catalog.setval('public.myapp_userlogin_groups_id_seq', 120, true);
 
 
 --
 -- Name: myapp_userlogin_id_seq; Type: SEQUENCE SET; Schema: public; Owner: licentauser
 --
 
-SELECT pg_catalog.setval('public.myapp_userlogin_id_seq', 55, true);
+SELECT pg_catalog.setval('public.myapp_userlogin_id_seq', 58, true);
 
 
 --
@@ -1062,7 +1034,7 @@ SELECT pg_catalog.setval('public.tastypie_apiaccess_id_seq', 1, false);
 -- Name: tastypie_apikey_id_seq; Type: SEQUENCE SET; Schema: public; Owner: licentauser
 --
 
-SELECT pg_catalog.setval('public.tastypie_apikey_id_seq', 23, true);
+SELECT pg_catalog.setval('public.tastypie_apikey_id_seq', 37, true);
 
 
 --

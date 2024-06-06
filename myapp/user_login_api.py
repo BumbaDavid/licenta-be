@@ -8,7 +8,7 @@ from tastypie.models import ApiKey
 from tastypie.resources import ModelResource
 from django.contrib.auth.models import Group
 from tastypie.authorization import Authorization
-from myapp.models import UserProfile, CompanyDetails
+from myapp.models import UserProfile, CompanyDetails, UserCV
 
 UserLogin = get_user_model()
 
@@ -37,6 +37,9 @@ class UserLoginResource(ModelResource):
                 age="",
             )
             user_profile.save()
+
+            user_cv = UserCV(user=bundle.obj)
+            user_cv.save()
 
             user_profile_group = Group.objects.get(name='UserProfile')
             bundle.obj.groups.add(user_profile_group)

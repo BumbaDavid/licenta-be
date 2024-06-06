@@ -1,4 +1,6 @@
 import json
+
+from django.db.models.fields import Field
 from django.urls import re_path
 from tastypie import fields
 from tastypie.authentication import ApiKeyAuthentication
@@ -17,6 +19,7 @@ class UserCVResource(ModelResource):
     class Meta:
         queryset = UserCV.objects.all()
         resource_name = 'userCV'
+        authorization = DjangoAuthorization()
         authentication = ApiKeyAuthentication()
         always_return_data = True
         allowed_methods = ['get', 'post', 'put', 'patch', 'delete']
@@ -28,8 +31,9 @@ class UserCVResource(ModelResource):
         ]
 
     def get_model_fields(self):
-        return [field.name for field in self._meta.get_fields()
-                if field.concrete and not field.many_to_many and not field.auto_created]
+        model_class = self._meta.object_class
+        return [field.name for field in model_class._meta.get_fields()
+                if isinstance(field, Field) and not field.many_to_many and not field.auto_created]
 
     def obj_create(self, bundle, **kwargs):
         auth_header = bundle.request.META.get('HTTP_AUTHORIZATION')
