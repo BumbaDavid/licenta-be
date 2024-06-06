@@ -16,6 +16,87 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+ALTER TABLE ONLY public.user_cv_table DROP CONSTRAINT user_cv_table_user_id_112c5436_fk_user_login_table_id;
+ALTER TABLE ONLY public.tastypie_apikey DROP CONSTRAINT tastypie_apikey_user_id_8c8fa920_fk_user_login_table_id;
+ALTER TABLE ONLY public.user_profile_table DROP CONSTRAINT myapp_userprofile_user_id_8f877d36_fk_myapp_userlogin_id;
+ALTER TABLE ONLY public.user_login_table_user_permissions DROP CONSTRAINT myapp_userlogin_user_userlogin_id_1e79140a_fk_myapp_use;
+ALTER TABLE ONLY public.user_login_table_user_permissions DROP CONSTRAINT myapp_userlogin_user_permission_id_b4c6a088_fk_auth_perm;
+ALTER TABLE ONLY public.user_login_table_groups DROP CONSTRAINT myapp_userlogin_groups_group_id_0d89786e_fk_auth_group_id;
+ALTER TABLE ONLY public.user_login_table_groups DROP CONSTRAINT myapp_userlogin_grou_userlogin_id_15188e1a_fk_myapp_use;
+ALTER TABLE ONLY public.company_details_table DROP CONSTRAINT myapp_companydetails_user_id_6eb1bbf4_fk_myapp_userlogin_id;
+ALTER TABLE ONLY public.job_offers_table DROP CONSTRAINT job_offers_table_company_id_2119fd0a_fk_company_d;
+ALTER TABLE ONLY public.job_application_table DROP CONSTRAINT job_application_table_user_id_d5f6d775_fk_user_login_table_id;
+ALTER TABLE ONLY public.job_application_table DROP CONSTRAINT job_application_tabl_job_offer_id_c7e20ef7_fk_job_offer;
+ALTER TABLE ONLY public.django_admin_log DROP CONSTRAINT django_admin_log_user_id_c564eba6_fk_myapp_userlogin_id;
+ALTER TABLE ONLY public.django_admin_log DROP CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co;
+ALTER TABLE ONLY public.auth_permission DROP CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm;
+DROP INDEX public.tastypie_apikey_key_17b411bb_like;
+DROP INDEX public.tastypie_apikey_key_17b411bb;
+DROP INDEX public.myapp_userlogin_username_87081017_like;
+DROP INDEX public.myapp_userlogin_user_permissions_userlogin_id_1e79140a;
+DROP INDEX public.myapp_userlogin_user_permissions_permission_id_b4c6a088;
+DROP INDEX public.myapp_userlogin_groups_userlogin_id_15188e1a;
+DROP INDEX public.myapp_userlogin_groups_group_id_0d89786e;
+DROP INDEX public.job_offers_table_company_id_2119fd0a;
+DROP INDEX public.job_application_table_user_id_d5f6d775;
+DROP INDEX public.job_application_table_job_offer_id_c7e20ef7;
+DROP INDEX public.django_session_session_key_c0390e0f_like;
+DROP INDEX public.django_session_expire_date_a5c62663;
+DROP INDEX public.django_admin_log_user_id_c564eba6;
+DROP INDEX public.django_admin_log_content_type_id_c4bce8eb;
+DROP INDEX public.auth_permission_content_type_id_2f476e4b;
+DROP INDEX public.auth_group_permissions_permission_id_84c5c92e;
+DROP INDEX public.auth_group_permissions_group_id_b120cbf9;
+DROP INDEX public.auth_group_name_a6ea08ec_like;
+ALTER TABLE ONLY public.user_cv_table DROP CONSTRAINT user_cv_table_user_cv_id_key;
+ALTER TABLE ONLY public.tastypie_apikey DROP CONSTRAINT tastypie_apikey_user_id_key;
+ALTER TABLE ONLY public.tastypie_apikey DROP CONSTRAINT tastypie_apikey_pkey;
+ALTER TABLE ONLY public.tastypie_apiaccess DROP CONSTRAINT tastypie_apiaccess_pkey;
+ALTER TABLE ONLY public.user_profile_table DROP CONSTRAINT myapp_userprofile_user_id_key;
+ALTER TABLE ONLY public.user_profile_table DROP CONSTRAINT myapp_userprofile_pkey;
+ALTER TABLE ONLY public.user_login_table DROP CONSTRAINT myapp_userlogin_username_key;
+ALTER TABLE ONLY public.user_login_table_user_permissions DROP CONSTRAINT myapp_userlogin_user_permissions_pkey;
+ALTER TABLE ONLY public.user_login_table_user_permissions DROP CONSTRAINT myapp_userlogin_user_per_userlogin_id_permission__04d817f9_uniq;
+ALTER TABLE ONLY public.user_login_table DROP CONSTRAINT myapp_userlogin_pkey;
+ALTER TABLE ONLY public.user_login_table_groups DROP CONSTRAINT myapp_userlogin_groups_userlogin_id_group_id_df2b70b4_uniq;
+ALTER TABLE ONLY public.user_login_table_groups DROP CONSTRAINT myapp_userlogin_groups_pkey;
+ALTER TABLE ONLY public.user_cv_table DROP CONSTRAINT myapp_usercv_pkey;
+ALTER TABLE ONLY public.job_offers_table DROP CONSTRAINT myapp_joboffers_pkey;
+ALTER TABLE ONLY public.company_details_table DROP CONSTRAINT myapp_companydetails_user_id_key;
+ALTER TABLE ONLY public.company_details_table DROP CONSTRAINT myapp_companydetails_pkey;
+ALTER TABLE ONLY public.job_application_table DROP CONSTRAINT job_application_table_user_id_job_offer_id_44052597_uniq;
+ALTER TABLE ONLY public.job_application_table DROP CONSTRAINT job_application_table_pkey;
+ALTER TABLE ONLY public.django_session DROP CONSTRAINT django_session_pkey;
+ALTER TABLE ONLY public.django_migrations DROP CONSTRAINT django_migrations_pkey;
+ALTER TABLE ONLY public.django_content_type DROP CONSTRAINT django_content_type_pkey;
+ALTER TABLE ONLY public.django_content_type DROP CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq;
+ALTER TABLE ONLY public.django_admin_log DROP CONSTRAINT django_admin_log_pkey;
+ALTER TABLE ONLY public.auth_permission DROP CONSTRAINT auth_permission_pkey;
+ALTER TABLE ONLY public.auth_permission DROP CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq;
+ALTER TABLE ONLY public.auth_group DROP CONSTRAINT auth_group_pkey;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissions_pkey;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq;
+ALTER TABLE ONLY public.auth_group DROP CONSTRAINT auth_group_name_key;
+DROP TABLE public.tastypie_apikey;
+DROP TABLE public.tastypie_apiaccess;
+DROP TABLE public.user_profile_table;
+DROP TABLE public.user_login_table_user_permissions;
+DROP TABLE public.user_login_table;
+DROP TABLE public.user_login_table_groups;
+DROP TABLE public.user_cv_table;
+DROP TABLE public.job_offers_table;
+DROP TABLE public.job_application_table;
+DROP TABLE public.django_session;
+DROP TABLE public.django_migrations;
+DROP TABLE public.django_content_type;
+DROP TABLE public.django_admin_log;
+DROP TABLE public.company_details_table;
+DROP TABLE public.auth_permission;
+DROP TABLE public.auth_group_permissions;
+DROP TABLE public.auth_group;
+DROP EXTENSION vector;
 --
 -- Name: vector; Type: EXTENSION; Schema: -; Owner: -
 --
@@ -626,6 +707,8 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 --
 
 COPY public.company_details_table (id, company_name, address, contact_email, phone, description, user_id) FROM stdin;
+40						57
+41						58
 20	TechSolutions			0771234794	TechSolutions este specializată în furnizarea de soluții software inovatoare companiilor din întreaga lume. Echipa noastră de experți excelează în dezvoltarea de aplicații personalizate, asigurând o integrare perfectă și sporind eficiența operațională.	35
 21	NextGenApps			0722965213	NextGenApps este în fruntea dezvoltării de aplicații mobile, creând aplicații de ultimă oră care redefinesc experiența utilizatorului. Accentul nostru este pe furnizarea de aplicații de înaltă calitate, scalabile și intuitive pentru diverse industrii.	36
 36	RetailWorld			0771231964	RetailWorld este o companie lider de retail care oferă o gamă largă de produse la prețuri competitive. Angajamentul nostru este de a oferi un serviciu excelent pentru clienți și o experiență de cumpărături perfectă.	52
@@ -712,46 +795,46 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 --
 
 COPY public.django_migrations (id, app, name, applied) FROM stdin;
-1	contenttypes	0001_initial	2024-05-31 11:28:53.235346+00
-2	contenttypes	0002_remove_content_type_name	2024-05-31 11:28:53.238941+00
-3	auth	0001_initial	2024-05-31 11:28:53.256599+00
-4	auth	0002_alter_permission_name_max_length	2024-05-31 11:28:53.259406+00
-5	auth	0003_alter_user_email_max_length	2024-05-31 11:28:53.262579+00
-6	auth	0004_alter_user_username_opts	2024-05-31 11:28:53.26602+00
-7	auth	0005_alter_user_last_login_null	2024-05-31 11:28:53.269787+00
-8	auth	0006_require_contenttypes_0002	2024-05-31 11:28:53.270602+00
-9	auth	0007_alter_validators_add_error_messages	2024-05-31 11:28:53.27369+00
-10	auth	0008_alter_user_username_max_length	2024-05-31 11:28:53.27599+00
-11	auth	0009_alter_user_last_name_max_length	2024-05-31 11:28:53.278291+00
-12	auth	0010_alter_group_name_max_length	2024-05-31 11:28:53.280901+00
-13	auth	0011_update_proxy_permissions	2024-05-31 11:28:53.283169+00
-14	auth	0012_alter_user_first_name_max_length	2024-05-31 11:28:53.285759+00
-15	myapp	0001_initial	2024-05-31 11:28:53.338129+00
-16	admin	0001_initial	2024-05-31 11:28:53.352007+00
-17	admin	0002_logentry_remove_auto_add	2024-05-31 11:28:53.357962+00
-18	admin	0003_logentry_add_action_flag_choices	2024-05-31 11:28:53.364116+00
-19	myapp	0017_enable_pg_vector	2024-05-31 11:28:53.365634+00
-20	myapp	0002_alter_userlogin_options_alter_companydetails_table_and_more	2024-05-31 11:28:53.385296+00
-21	myapp	0003_remove_userprofile_email_remove_userprofile_name_and_more	2024-05-31 11:28:53.39945+00
-22	myapp	0004_joboffers_job_category_joboffers_job_position	2024-05-31 11:28:53.403753+00
-23	myapp	0005_remove_userprofile_gender	2024-05-31 11:28:53.408317+00
-24	myapp	0006_alter_userprofile_address_and_more	2024-05-31 11:28:53.425049+00
-25	myapp	0007_remove_userprofile_date_of_birth_userprofile_age	2024-05-31 11:28:53.433375+00
-26	myapp	0008_remove_usercv_user_profile_usercv_user_cv_and_more	2024-05-31 11:28:53.474559+00
-27	myapp	0009_rename_user_cv_usercv_user	2024-05-31 11:28:53.481584+00
-28	myapp	0010_alter_usercv_abilities_alter_usercv_experience_and_more	2024-05-31 11:28:53.482274+00
-29	myapp	0011_alter_usercv_abilities_alter_usercv_experience_and_more	2024-05-31 11:28:53.54285+00
-30	myapp	0012_wrap_text_in_array	2024-05-31 11:28:53.550803+00
-31	myapp	0013_remove_companydetails_job_offers_joboffers_company_and_more	2024-05-31 11:28:53.587259+00
-32	myapp	0014_rename_email_companydetails_contact_email	2024-05-31 11:28:53.591805+00
-33	myapp	0015_alter_joboffers_requirements	2024-05-31 11:28:53.598408+00
-34	myapp	0016_jobapplication_joboffers_applicants	2024-05-31 11:28:53.615769+00
-35	myapp	0018_merge	2024-05-31 11:28:53.61652+00
-36	myapp	0019_joboffers_description_vector_and_more	2024-05-31 11:28:53.641282+00
-37	sessions	0001_initial	2024-05-31 11:28:53.647795+00
-38	tastypie	0001_initial	2024-05-31 11:28:53.666457+00
-39	tastypie	0002_api_access_url_length	2024-05-31 11:28:53.668072+00
-40	tastypie	0003_alter_apiaccess_id_alter_apikey_id	2024-05-31 11:28:53.684388+00
+1	contenttypes	0001_initial	2024-06-04 09:16:24.516784+00
+2	contenttypes	0002_remove_content_type_name	2024-06-04 09:16:24.523943+00
+3	auth	0001_initial	2024-06-04 09:16:24.567693+00
+4	auth	0002_alter_permission_name_max_length	2024-06-04 09:16:24.574865+00
+5	auth	0003_alter_user_email_max_length	2024-06-04 09:16:24.579989+00
+6	auth	0004_alter_user_username_opts	2024-06-04 09:16:24.586826+00
+7	auth	0005_alter_user_last_login_null	2024-06-04 09:16:24.59809+00
+8	auth	0006_require_contenttypes_0002	2024-06-04 09:16:24.601159+00
+9	auth	0007_alter_validators_add_error_messages	2024-06-04 09:16:24.608016+00
+10	auth	0008_alter_user_username_max_length	2024-06-04 09:16:24.615461+00
+11	auth	0009_alter_user_last_name_max_length	2024-06-04 09:16:24.624642+00
+12	auth	0010_alter_group_name_max_length	2024-06-04 09:16:24.631654+00
+13	auth	0011_update_proxy_permissions	2024-06-04 09:16:24.639333+00
+14	auth	0012_alter_user_first_name_max_length	2024-06-04 09:16:24.645708+00
+15	myapp	0001_initial	2024-06-04 09:16:24.802751+00
+16	admin	0001_initial	2024-06-04 09:16:24.835373+00
+17	admin	0002_logentry_remove_auto_add	2024-06-04 09:16:24.844385+00
+18	admin	0003_logentry_add_action_flag_choices	2024-06-04 09:16:24.856644+00
+19	myapp	0017_enable_pg_vector	2024-06-04 09:16:24.869043+00
+20	myapp	0002_alter_userlogin_options_alter_companydetails_table_and_more	2024-06-04 09:16:24.920662+00
+21	myapp	0003_remove_userprofile_email_remove_userprofile_name_and_more	2024-06-04 09:16:24.953351+00
+22	myapp	0004_joboffers_job_category_joboffers_job_position	2024-06-04 09:16:24.965377+00
+23	myapp	0005_remove_userprofile_gender	2024-06-04 09:16:24.978399+00
+24	myapp	0006_alter_userprofile_address_and_more	2024-06-04 09:16:25.013177+00
+25	myapp	0007_remove_userprofile_date_of_birth_userprofile_age	2024-06-04 09:16:25.033284+00
+26	myapp	0008_remove_usercv_user_profile_usercv_user_cv_and_more	2024-06-04 09:16:25.15567+00
+27	myapp	0009_rename_user_cv_usercv_user	2024-06-04 09:16:25.171295+00
+28	myapp	0010_alter_usercv_abilities_alter_usercv_experience_and_more	2024-06-04 09:16:25.173722+00
+29	myapp	0011_alter_usercv_abilities_alter_usercv_experience_and_more	2024-06-04 09:16:25.293081+00
+30	myapp	0012_wrap_text_in_array	2024-06-04 09:16:25.306575+00
+31	myapp	0013_remove_companydetails_job_offers_joboffers_company_and_more	2024-06-04 09:16:25.383825+00
+32	myapp	0014_rename_email_companydetails_contact_email	2024-06-04 09:16:25.393951+00
+33	myapp	0015_alter_joboffers_requirements	2024-06-04 09:16:25.413468+00
+34	myapp	0016_jobapplication_joboffers_applicants	2024-06-04 09:16:25.461815+00
+35	myapp	0018_merge	2024-06-04 09:16:25.46811+00
+36	myapp	0019_joboffers_description_vector_and_more	2024-06-04 09:16:25.54041+00
+37	sessions	0001_initial	2024-06-04 09:16:25.56045+00
+38	tastypie	0001_initial	2024-06-04 09:16:25.605659+00
+39	tastypie	0002_api_access_url_length	2024-06-04 09:16:25.614699+00
+40	tastypie	0003_alter_apiaccess_id_alter_apikey_id	2024-06-04 09:16:25.654207+00
 \.
 
 
@@ -761,6 +844,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 
 COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
 2b9z1kztotzz077grhwr765eaxzqes59	.eJxVjMsOwiAQRf-FtSE8SmVcuu83EGYGpGogKe3K-O_apAvd3nPOfYkQt7WEraclzCwuQovT74aRHqnugO-x3pqkVtdlRrkr8qBdTo3T83q4fwcl9vKtlcLBZG2RCJRFyKO3mLWKCdE7AKfBxZGtN6wVeZ9IkcsA9gyDIzbi_QHexzeo:1sE56T:VHwkSHJo9XsKLPAkFLYT0KLwm32XOX4oEbBAnmZVw8g	2024-06-17 10:39:49.49779+00
+wwgj98jxb1nnkyprx0ze4p579hn4qu6e	.eJxVjMsOwiAQRf-FtSE8SmVcuu83EGYGpGogKe3K-O_apAvd3nPOfYkQt7WEraclzCwuQovT74aRHqnugO-x3pqkVtdlRrkr8qBdTo3T83q4fwcl9vKtlcLBZG2RCJRFyKO3mLWKCdE7AKfBxZGtN6wVeZ9IkcsA9gyDIzbi_QHexzeo:1sETeJ:SRQPSaQiTGvkl-xkwS8D3B1Sp_bfq_CiZAhg8P4pLZo	2024-06-18 12:52:23.07214+00
 \.
 
 
@@ -793,8 +877,9 @@ COPY public.tastypie_apiaccess (id, identifier, url, request_method, accessed) F
 --
 
 COPY public.tastypie_apikey (id, key, created, user_id) FROM stdin;
-23	82de80805bc92eec4bc2398f7d9863458b8e5d97	2024-06-03 14:18:26.726513+00	55
-38	5f08e0190894dd41256cb5140f76374f5957b225	2024-06-06 10:56:05.235095+00	6
+25	18a354c19fbdd2a443d34150664df2428bcc63fe	2024-06-04 12:49:25.202992+00	57
+37	864f41908820460f794dbb4596fd19af37005341	2024-06-05 10:00:32.315435+00	12
+38	5ca8a24ff42f23cef471b4bc50405102f0cce583	2024-06-06 11:17:39.188711+00	6
 \.
 
 
@@ -806,13 +891,13 @@ COPY public.user_cv_table (id, studies, experience, abilities, languages, hobbie
 2	{}	{}	{asd}	{}	{}	4
 1	{studie1}	{experience1}	{ability1,hello}	{language2}	{hobby1}	3
 3	{}	{}	{}	{}	{}	5
+4	{}	{}	{}	{}	{}	6
 5	{}	{}	{}	{}	{}	7
 6	{}	{}	{}	{}	{}	8
 7	{}	{}	{}	{}	{}	9
 8	{}	{}	{}	{}	{}	10
 9	{}	{}	{}	{}	{}	11
 10	{}	{}	{}	{}	{}	12
-4	{}	{}	{hello}	{}	{}	6
 \.
 
 
@@ -821,18 +906,10 @@ COPY public.user_cv_table (id, studies, experience, abilities, languages, hobbie
 --
 
 COPY public.user_login_table (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined, account_type) FROM stdin;
-1	pbkdf2_sha256$720000$qzJSOkleyvlsvy8WbUyNf5$op6PpyKFw+FrX4LqBy/5oakQ4fCpLZyH9FIP68wGN68=	2024-06-03 10:39:49.495372+00	t	admin			admin@example.com	t	t	2024-06-03 10:37:59.067918+00	
 2	pbkdf2_sha256$720000$BrDZ4PGssjQs0JsvYoxOzi$3Pk2dM05E8MlQ+V0ZII+Y25OH7c/QP5q1FvMiJYGwb4=	\N	f	David	Bumba	David	david@email.com	f	t	2024-06-03 11:06:14.32993+00	normal
-3	pbkdf2_sha256$720000$aIKyH5PQgJbfOIMnZqy6Km$9F1cy3+865XBlmRHpuJqFZ03JmbasQKAKa5UB5MQ23o=	\N	f	skywalker77	Luke	Skywalker	skywalker77@example.com	f	t	2024-06-03 11:13:56.690173+00	normal
 4	pbkdf2_sha256$720000$nLlZSWztv3vsX8m5GN7h5q$svF7shPdgx/jev8zFbJlu6obYljLCKDTwpvZfx9I+bQ=	\N	f	oceanbreeze88	Maya	Johnson	oceanbreeze88@example.com	f	t	2024-06-03 11:14:04.686864+00	normal
 5	pbkdf2_sha256$720000$5swC5kP5nmAdk4zpZfDLcF$RXsya8/MD8qMCmMon7XoZhl6vYLKJ58HpqX2R6kYxU8=	\N	f	forestwhisper22	Ethan	Clark	forestwhisper22@example.com	f	t	2024-06-03 11:14:15.846483+00	normal
-6	pbkdf2_sha256$720000$q3nyiPEoCqCfESGuIp6ukW$ZcZOeN5X/d7lQjZ6ZpHmB4e02wU1f0KXFwqFmdIVKA4=	\N	f	mountainpeak99	Ava	Miller	mountainpeak99@example.com	f	t	2024-06-03 11:14:26.102998+00	normal
-7	pbkdf2_sha256$720000$qy5YfFppLPpwFMefy5s9Ef$DAqErwKHj6zQ8SE3Xbc1wqr0Ix/sh545BVLDwjfD1Kk=	\N	f	sunsetglow55	Liam	Davis	sunsetglow55@example.com	f	t	2024-06-03 11:14:37.141751+00	normal
-8	pbkdf2_sha256$720000$vn6DmilnpOkdcrl6Zw9GhU$C9cRozhKqjOejV7vurGWTYjLrP37uwS4D+DbryVf2EE=	\N	f	starlight88	Sophia	Garcia	starlight88@example.com	f	t	2024-06-03 11:14:45.781092+00	normal
-9	pbkdf2_sha256$720000$AMYSD5DDB9ZLGxQU47KplK$Pe4IPVcX9cjwncfyqzqvjs8eXXy1Bd3oULlHz6nWMGM=	\N	f	riverflow33	Noah	Martinez	riverflow33@example.com	f	t	2024-06-03 11:14:52.712691+00	normal
 10	pbkdf2_sha256$720000$fzvb89U9WJrU71dU4b0N6c$A833vY433XxqL+Bv4eqMamNaNlDd8oEGm/mZIobJ4eo=	\N	f	desertrose66	Isabella	Rodriguez	desertrose66@example.com	f	t	2024-06-03 11:14:59.621252+00	normal
-11	pbkdf2_sha256$720000$0hNNhSJsfTilnrWCxmCE4P$0Vlln/8d3XG46F3yFyxzO+WlYSIRoe1MLJuL6EWQUQg=	\N	f	midnightowl44	James	Hernandez	midnightowl44@example.com	f	t	2024-06-03 11:15:06.472557+00	normal
-12	pbkdf2_sha256$720000$zWINaajLq4bXovK5ec1FCH$hx2yjb7SIWZR9YFyIq3rAPdKzzFm3a+AjXoMp2mRhkY=	\N	f	rainbowdash77	Emily	Lopez	rainbowdash77@example.com	f	t	2024-06-03 11:15:12.738106+00	normal
 35	pbkdf2_sha256$720000$tlNDH4YFy4h6y4phq0spch$Th7+NKGw3Quecu334VtUOFioDxOlE2/HPGMr7lmid2A=	\N	f	techsolutions			info@techsolutions.com	f	t	2024-06-03 12:41:57.839538+00	company
 43	pbkdf2_sha256$720000$hb5V03EqXfzcVSIuX6O43W$2Zuyt2qh8rQfs7n9Enb78ntSWarukFs7O6CN/Wa77lc=	\N	f	agriventures			info@agriventures.com	f	t	2024-06-03 12:44:10.694709+00	company
 48	pbkdf2_sha256$720000$T6GzVOa7OyeXkvrMSGgcnd$rhgCsF5/nqBYSt5uDJnyRvLwjPJPqXflw3musDubkLo=	\N	f	bizventures			contact@bizventures.com	f	t	2024-06-03 12:44:49.96276+00	company
@@ -853,6 +930,17 @@ COPY public.user_login_table (id, password, last_login, is_superuser, username, 
 41	pbkdf2_sha256$720000$XXifvTL5e1l6jg9INk6Lvx$wlcNEPhnJTzDAEGiBrQFmhnQSQsFujNudRZBdOsVR5E=	\N	f	agrico			info@agrico.com	f	t	2024-06-03 12:44:00.977302+00	company
 37	pbkdf2_sha256$720000$NtlVPZixtesLgRYGDzxugq$uVRy/BZgsLoGE00NCv/tZHf3VOTuCqtSt27xBpW2xJ8=	\N	f	cybernetics			support@cybernetics.com	f	t	2024-06-03 12:43:07.759718+00	company
 42	pbkdf2_sha256$720000$IuqNUehazNTY0W3v9dVE18$qID5UwYRHPFzaWGKP6sPsoMULnfIUkutK4IO/km5hWI=	\N	f	harvesthub			support@harvesthub.com	f	t	2024-06-03 12:44:05.767259+00	company
+1	pbkdf2_sha256$720000$qzJSOkleyvlsvy8WbUyNf5$op6PpyKFw+FrX4LqBy/5oakQ4fCpLZyH9FIP68wGN68=	2024-06-04 12:52:23.069319+00	t	admin			admin@example.com	t	t	2024-06-03 10:37:59.067918+00	
+56	pbkdf2_sha256$720000$NSaZMYgRhcXzWyf7C8lkt4$NaLveUYHz2Xl5sRNJyBShKi/pe3EUvpkHydoEKToT+4=	\N	f	viaductus	Rares	Stanca	rares.stanca@email.com	f	t	2024-06-04 12:41:04.395188+00	user
+3	pbkdf2_sha256$720000$aIKyH5PQgJbfOIMnZqy6Km$9F1cy3+865XBlmRHpuJqFZ03JmbasQKAKa5UB5MQ23o=	\N	f	skywalker77	Luke	Skywalker	skywalker77@example.com	f	t	2024-06-03 11:13:56.690173+00	normal
+57	pbkdf2_sha256$720000$oHFpam0rlHBoW4n4UUIw2P$d2rY6fKbbM6cAhEYt/FO/v/1HKfgbgy6WyFxNxd0/vU=	\N	f	kendra			kendra@group.com	f	t	2024-06-04 12:49:24.116816+00	company
+6	pbkdf2_sha256$720000$q3nyiPEoCqCfESGuIp6ukW$ZcZOeN5X/d7lQjZ6ZpHmB4e02wU1f0KXFwqFmdIVKA4=	\N	f	mountainpeak99	Ava	Miller	mountainpeak99@example.com	f	t	2024-06-03 11:14:26.102998+00	normal
+58	pbkdf2_sha256$720000$v8ton9ZWBcalW22aL4u4Xg$kVaTMlaCi2NjbyAVnImvgVRwzv3mUy1Tm/QApUx13CY=	\N	f	karina			karina@bumba.email	f	t	2024-06-04 12:58:49.059462+00	company
+7	pbkdf2_sha256$720000$qy5YfFppLPpwFMefy5s9Ef$DAqErwKHj6zQ8SE3Xbc1wqr0Ix/sh545BVLDwjfD1Kk=	\N	f	sunsetglow55	Liam	Davis	sunsetglow55@example.com	f	t	2024-06-03 11:14:37.141751+00	normal
+8	pbkdf2_sha256$720000$vn6DmilnpOkdcrl6Zw9GhU$C9cRozhKqjOejV7vurGWTYjLrP37uwS4D+DbryVf2EE=	\N	f	starlight88	Sophia	Garcia	starlight88@example.com	f	t	2024-06-03 11:14:45.781092+00	normal
+9	pbkdf2_sha256$720000$AMYSD5DDB9ZLGxQU47KplK$Pe4IPVcX9cjwncfyqzqvjs8eXXy1Bd3oULlHz6nWMGM=	\N	f	riverflow33	Noah	Martinez	riverflow33@example.com	f	t	2024-06-03 11:14:52.712691+00	normal
+11	pbkdf2_sha256$720000$0hNNhSJsfTilnrWCxmCE4P$0Vlln/8d3XG46F3yFyxzO+WlYSIRoe1MLJuL6EWQUQg=	\N	f	midnightowl44	James	Hernandez	midnightowl44@example.com	f	t	2024-06-03 11:15:06.472557+00	normal
+12	pbkdf2_sha256$720000$zWINaajLq4bXovK5ec1FCH$hx2yjb7SIWZR9YFyIq3rAPdKzzFm3a+AjXoMp2mRhkY=	\N	f	rainbowdash77	Emily	Lopez	rainbowdash77@example.com	f	t	2024-06-03 11:15:12.738106+00	normal
 \.
 
 
@@ -934,6 +1022,10 @@ COPY public.user_login_table_groups (id, userlogin_id, group_id) FROM stdin;
 114	54	3
 115	55	1
 116	55	3
+117	57	1
+118	57	3
+119	58	1
+120	58	3
 \.
 
 
@@ -951,16 +1043,16 @@ COPY public.user_login_table_user_permissions (id, userlogin_id, permission_id) 
 
 COPY public.user_profile_table (id, address, phone_number, user_id, age) FROM stdin;
 1			2	
-2			3	
 3			4	
 4			5	
-5			6	
-6			7	
-7			8	
-8			9	
 9			10	
-10			11	
-11			12	
+2	Timisoara	0731292012	3	22
+5	Oradea	0722991823	6	25
+6	Bucuresti	0798231567	7	30
+7	Cluj-Napoca	0723901992	8	24
+8	Iasi	0788231994	9	26
+10	Constanta	0722549014	11	28
+11	Sibiu	0756923568	12	23
 \.
 
 
