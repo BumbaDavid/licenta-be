@@ -1,10 +1,11 @@
 #!/bin/bash
 
 # Variables
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 CONTAINER_NAME="postgres"
 DB_USER="licentauser"
 DB_NAME="licentadb"
-HOST_BACKUP_PATH="/home/david/david/LICENTA/BE/db/backup_host.sql"
+HOST_BACKUP_PATH="$SCRIPT_DIR/backup_host.sql"
 CONTAINER_BACKUP_PATH="/backup.sql"
 
 # Copy the backup file from the host to the container

@@ -39,7 +39,7 @@ class UserCV(models.Model):
 
 class JobOffers(models.Model):
     job_description = models.TextField()
-    salary = models.DecimalField(max_digits=10, decimal_places=2)
+    salary = models.CharField(max_length=100, null=True, blank=True)
     requirements = ArrayField(models.TextField(), blank=True, default=list)
     location = models.CharField(max_length=100)
     job_position = models.TextField(default="default")

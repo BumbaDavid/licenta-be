@@ -1,7 +1,9 @@
+import json
+
 from tastypie.authentication import ApiKeyAuthentication
 from tastypie.authorization import DjangoAuthorization
 from tastypie.exceptions import ImmediateHttpResponse, BadRequest
-from tastypie.http import HttpUnauthorized, HttpBadRequest, HttpForbidden, HttpNotFound, HttpNoContent
+from tastypie.http import HttpUnauthorized, HttpBadRequest, HttpForbidden, HttpNotFound, HttpNoContent, HttpResponse
 from tastypie.resources import ModelResource
 from tastypie import fields
 from django.shortcuts import get_object_or_404
@@ -24,7 +26,7 @@ class CompanyDetailsResource(ModelResource):
         authentication = ApiKeyAuthentication()
         always_return_data = True
         allowed_methods = ['get', 'post', 'put', 'patch', 'delete']
-        excludes = ['user']
+        excludes = ['user', 'resource_uri']
 
 
 class JobOffersResource(ModelResource):
@@ -38,7 +40,8 @@ class JobOffersResource(ModelResource):
         authorization = CustomDjangoAuthorization()
         always_return_data = True
         allowed_methods = ['get', 'post', 'put', 'patch', 'delete']
-        excludes = ['user']
+        excludes = ['user', 'description_vector', 'requirements_vector', 'location_vector',
+                    'job_position_vector', 'job_category_vector']
         filtering = {
             'company': ('exact', 'in'),
             'job_category': ('exact', 'startswith'),
@@ -52,7 +55,8 @@ class JobOffersResource(ModelResource):
                     self.wrap_view('get_applied_jobs'), name="api_get_applied_jobs"),
             re_path(r"^(?P<resource_name>%s)/(?P<pk>\d+)/cancel-application/$" % self._meta.resource_name,
                     self.wrap_view('cancel_application'), name="api_cancel_application"),
-
+            re_path(r"^(?P<resource_name>%s)/create-bulk/$" % self._meta.resource_name,
+                    self.wrap_view('obj_create_bulk'), name="api_obj_create_bulk")
         ]
 
     def dehydrate(self, bundle):
@@ -76,6 +80,30 @@ class JobOffersResource(ModelResource):
             raise IntegrityError('no associated company found for the given user.')
 
         return super(JobOffersResource, self).obj_create(bundle, **kwargs)
+
+    def obj_create_bulk(self, request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        self.is_authenticated(request)
+        self.throttle_check(request)
+
+        user = request.user
+        data = json.loads(request.body)
+
+        if not isinstance(data, list):
+            raise ImmediateHttpResponse(HttpBadRequest("Expected a list of items"))
+
+        for item in data:
+            bundle = self.build_bundle(data=item, request=request)
+            bundle = self.full_hydrate(bundle)
+            if not user.has_perm('myapp.add_joboffers'):
+                raise ImmediateHttpResponse(HttpUnauthorized("You do not have enough perms"))
+            try:
+                bundle.data['company'] = CompanyDetails.objects.get(user=request.user)
+            except CompanyDetails.DoesNotExist:
+                raise IntegrityError('no company for user')
+            super(JobOffersResource, self).obj_create(bundle, **kwargs)
+
+        return self.create_response(request, {"message": "Bulk of job offers successfully created"})
 
     def apply_filters(self, request, applicable_filters):
         show_all = request.GET.get('all', 'false').lower() == 'true'
