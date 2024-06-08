@@ -44,7 +44,9 @@ class JobOffersResource(ModelResource):
                     'job_position_vector', 'job_category_vector']
         filtering = {
             'company': ('exact', 'in'),
-            'job_category': ('exact', 'startswith'),
+            'job_category': ('exact', 'startswith', 'contains'),
+            'location': 'contains',
+            'job_position': 'contains',
         }
 
     def prepend_urls(self):
