@@ -157,9 +157,13 @@ CORS_ALLOW_METHODS = [
 #         },
 #     },
 #     'loggers': {
+#         '': {
+#             'handlers': ['console'],
+#         },
 #         'django': {
 #             'handlers': ['console'],
 #             'level': 'DEBUG',
+#             'propagate': True
 #         },
 #         'myapp': {  # Replace 'myapp' with the name of your Django app
 #             'handlers': ['console'],

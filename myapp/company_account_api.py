@@ -8,13 +8,14 @@ from tastypie.resources import ModelResource
 from tastypie import fields
 from django.shortcuts import get_object_or_404
 from django.urls import re_path
+from tastypie.constants import ALL
 
 from myapp.custom_auth import CustomApiKeyAuthentication, CustomDjangoAuthorization
 from myapp.models import CompanyDetails, JobOffers, JobApplication
 from django.db import IntegrityError
 import logging
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('django')
 
 
 class CompanyDetailsResource(ModelResource):
@@ -43,10 +44,13 @@ class JobOffersResource(ModelResource):
         excludes = ['user', 'description_vector', 'requirements_vector', 'location_vector',
                     'job_position_vector', 'job_category_vector']
         filtering = {
-            'company': ('exact', 'in'),
-            'job_category': ('exact', 'startswith', 'contains'),
-            'location': 'contains',
-            'job_position': 'contains',
+            'company': ALL,
+            'location': ALL,
+            'job_position': ALL,
+            'job_category': ALL,
+            'job_type': ALL,
+            'study_level': ALL,
+            'experience_level': ALL,
         }
 
     def prepend_urls(self):
@@ -218,3 +222,4 @@ class JobOffersResource(ModelResource):
         job_application.delete()
 
         return self.create_response(request, {'success': 'job application canceled successfully'}, HttpNoContent)
+

@@ -93,15 +93,19 @@ class UserLoginResource(ModelResource):
         self.method_check(request, allowed=['post'])
         data = self.deserialize(request, request.body, format=request.META.get('CONTENT_TYPE', 'application/json'))
         username = data.get('username', '')
-        print("username ", username)
         password = data.get('password', '')
-        print("password", password)
+
         user = authenticate(username=username, password=password)
-        print("here is the user : ", user)
+
         if user:
             if user.is_active:
                 api_key, created = ApiKey.objects.get_or_create(user=user)
-                return self.create_response(request, {'api_key': api_key.key})
+                response_data = {
+                    'api_key': api_key.key,
+                    'username': user.username,
+                    'account_type': user.account_type
+                }
+                return self.create_response(request, {'data': response_data}, HttpAccepted)
             else:
                 return self.create_response(request, {'error': 'Account is disabled'}, HttpForbidden)
         else:

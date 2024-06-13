@@ -42,8 +42,12 @@ class JobOffers(models.Model):
     salary = models.CharField(max_length=100, null=True, blank=True)
     requirements = ArrayField(models.TextField(), blank=True, default=list)
     location = models.CharField(max_length=100)
-    job_position = models.TextField(default="default")
+    job_title = models.TextField(default="default")
     job_category = models.TextField(default="General")
+    job_type = models.CharField(null=True, blank=True)
+    study_level = models.CharField(null=True, blank=True)
+    experience_level = models.CharField(null=True, blank=True)
+    job_position = models.CharField(null=True, blank=True)
     company = models.ForeignKey(
         'CompanyDetails',
         on_delete=models.CASCADE,
