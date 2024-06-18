@@ -1,7 +1,9 @@
-from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.postgres.fields import ArrayField
+from django.db import models
 from pgvector.django import VectorField
+
+from scripts.embeddings import generate_embeddings
 
 
 class UserLogin(AbstractUser):
@@ -61,11 +63,16 @@ class JobOffers(models.Model):
     description_vector = VectorField(dimensions=300, default=[0.0] * 300)
     requirements_vector = VectorField(dimensions=300, default=[0.0] * 300)
     location_vector = VectorField(dimensions=300, default=[0.0] * 300)
-    job_position_vector = VectorField(dimensions=300, default=[0.0] * 300)
-    job_category_vector = VectorField(dimensions=300, default=[0.0] * 300)
 
     class Meta:
         db_table = 'job_offers_table'
+
+    def save(self, *args, **kwargs):
+        self.description_vector = generate_embeddings(self.job_description)
+        requirements_text = ''.join(self.requirements)
+        self.requirements_vector = generate_embeddings(requirements_text)
+        self.location_vector = generate_embeddings(self.location)
+        super(JobOffers, self).save(*args, **kwargs)
 
 
 class JobApplication(models.Model):
