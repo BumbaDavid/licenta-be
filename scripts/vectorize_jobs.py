@@ -7,7 +7,6 @@ from myapp.models import JobOffers
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "licentabe.settings")
 django.setup()
 
-openai.api_key = ''
 
 embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")
 

@@ -1,7 +1,6 @@
 import json
 
 from tastypie.authentication import ApiKeyAuthentication
-from tastypie.authorization import DjangoAuthorization
 from tastypie.exceptions import ImmediateHttpResponse, BadRequest
 from tastypie.http import HttpUnauthorized, HttpBadRequest, HttpForbidden, HttpNotFound, HttpNoContent, HttpResponse
 from tastypie.resources import ModelResource
@@ -9,11 +8,14 @@ from tastypie import fields
 from django.shortcuts import get_object_or_404
 from django.urls import re_path
 from tastypie.constants import ALL
+from tastypie.paginator import Paginator
 
 from myapp.custom_auth import CustomApiKeyAuthentication, CustomDjangoAuthorization
 from myapp.models import CompanyDetails, JobOffers, JobApplication
 from django.db import IntegrityError
 import logging
+
+from scripts.openai_api import process_user_input
 
 logger = logging.getLogger('django')
 
@@ -62,7 +64,9 @@ class JobOffersResource(ModelResource):
             re_path(r"^(?P<resource_name>%s)/(?P<pk>\d+)/cancel-application/$" % self._meta.resource_name,
                     self.wrap_view('cancel_application'), name="api_cancel_application"),
             re_path(r"^(?P<resource_name>%s)/create-bulk/$" % self._meta.resource_name,
-                    self.wrap_view('obj_create_bulk'), name="api_obj_create_bulk")
+                    self.wrap_view('obj_create_bulk'), name="api_obj_create_bulk"),
+            re_path(r"^(?P<resource_name>%s)/get-search-bar-jobs/$" % self._meta.resource_name,
+                    self.wrap_view('get_search_bar_jobs'), name="api_get_search_bar_jobs")
         ]
 
     def dehydrate(self, bundle):
@@ -120,6 +124,11 @@ class JobOffersResource(ModelResource):
                     applicable_filters['company__id'] = user.company_profile.id
 
         return super(JobOffersResource, self).apply_filters(request, applicable_filters)
+
+    def apply_sorting(self, obj_list, options=None):
+        if options and options.get('random', 'false') == 'true':
+            obj_list = obj_list.order_by('?')[:10]  # Fetch 8 random job offers
+        return obj_list
 
     def obj_update(self, bundle, skip_errors=False, **kwargs):
         if bundle.request.method.lower() == 'patch':
@@ -222,4 +231,49 @@ class JobOffersResource(ModelResource):
         job_application.delete()
 
         return self.create_response(request, {'success': 'job application canceled successfully'}, HttpNoContent)
+
+    def get_search_bar_jobs(self, request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        self.is_authenticated(request)
+        self.throttle_check(request)
+        user = request.user
+
+        search_bar_input = self.deserialize(request, request.body, format=request.META.get('CONTENT_TYPE', 'application/json'))
+        print(search_bar_input)
+
+        if 'text_input' in search_bar_input:
+            search_query = search_bar_input['text_input']
+            job_matches = process_user_input(user, 'text', text_input=search_query)
+        else:
+            return self.create_response(request, {"response": "Invalid text input or missing "}, HttpBadRequest)
+
+        job_matches_id = [job.id for job in job_matches]
+
+        print(job_matches_id)
+        # Fetch the job objects based on IDs
+        jobs = JobOffers.objects.filter(id__in=job_matches_id)
+
+        paginator = Paginator(request.GET, jobs, resource_uri=self.get_resource_uri())
+        to_be_paginated = paginator.page()
+
+        # Serialize the job objects
+        bundles = [self.build_bundle(obj=job, request=request) for job in to_be_paginated['objects']]
+        serialized_jobs = [self.full_dehydrate(bundle, for_list=True) for bundle in bundles]
+
+        # Prepare and return the response
+        response_data = {
+            'objects': serialized_jobs,
+            'meta': {
+                'limit': paginator.get_limit(),
+                'next': paginator.get_next(paginator.get_limit(), paginator.get_offset(), paginator.get_count()),
+                'offset': paginator.get_offset(),
+                'previous': paginator.get_previous(paginator.get_limit(), paginator.get_offset()),
+                'total_count': paginator.get_count()
+            }
+        }
+        return self.create_response(request, response_data)
+
+
+
+
 

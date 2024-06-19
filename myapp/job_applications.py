@@ -7,6 +7,7 @@ from myapp.models import JobApplication, CompanyDetails, UserCV, UserProfile, Us
 from django.urls import re_path
 from django.forms.models import model_to_dict
 
+
 class JobApplicationResource(ModelResource):
     job_offer = fields.ForeignKey('myapp.company_account_api.JobOffersResource', 'job_offer')
 

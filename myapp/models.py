@@ -35,6 +35,25 @@ class UserCV(models.Model):
     languages = ArrayField(models.TextField(), blank=True, default=list)
     hobbies = ArrayField(models.TextField(), blank=True, default=list)
 
+    studies_vector = VectorField(dimensions=1536, null=True, blank=True)
+    experience_vector = VectorField(dimensions=1536, null=True, blank=True)
+    abilities_vector = VectorField(dimensions=1536, null=True, blank=True)
+    languages_vector = VectorField(dimensions=1536, null=True, blank=True)
+    hobbies_vector = VectorField(dimensions=1536, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        studies = ''.join(self.studies)
+        self.studies_vector = generate_embeddings(studies)
+        experience = ''.join(self.experience)
+        self.experience_vector = generate_embeddings(experience)
+        abilities = ''.join(self.abilities)
+        self.abilities_vector = generate_embeddings(abilities)
+        languages = ''.join(self.languages)
+        self.languages_vector = generate_embeddings(languages)
+        hobbies = ''.join(self.hobbies)
+        self.hobbies_vector = generate_embeddings(hobbies)
+        super(UserCV, self).save(*args, **kwargs)
+
     class Meta:
         db_table = 'user_cv_table'
 
@@ -60,16 +79,16 @@ class JobOffers(models.Model):
 
     applicants = models.ManyToManyField(UserLogin, through='JobApplication', related_name='applied_jobs')
 
-    description_vector = VectorField(dimensions=300, default=[0.0] * 300)
-    requirements_vector = VectorField(dimensions=300, default=[0.0] * 300)
-    location_vector = VectorField(dimensions=300, default=[0.0] * 300)
+    description_vector = VectorField(dimensions=1536)
+    requirements_vector = VectorField(dimensions=1536)
+    location_vector = VectorField(dimensions=1536)
 
     class Meta:
         db_table = 'job_offers_table'
 
     def save(self, *args, **kwargs):
         self.description_vector = generate_embeddings(self.job_description)
-        requirements_text = ''.join(self.requirements)
+        requirements_text = ' '.join(self.requirements)
         self.requirements_vector = generate_embeddings(requirements_text)
         self.location_vector = generate_embeddings(self.location)
         super(JobOffers, self).save(*args, **kwargs)
