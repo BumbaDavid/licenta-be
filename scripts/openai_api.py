@@ -9,9 +9,6 @@ from sklearn.decomposition import PCA
 
 
 def process_user_input(user, input_type, text_input=None):
-    """
-    Process user input to generate job recommendations based on a specific CV vector or text input.
-    """
     if input_type == 'cv':
         try:
             user_cv = UserCV.objects.get(user=user)
@@ -28,14 +25,6 @@ def process_user_input(user, input_type, text_input=None):
 
 
 def search_jobs(query_input, from_text=False):
-    """
-    Perform a vector-based search to find the most similar job offers based on all provided vectors in UserCV.
-    Args:
-    user_cv (UserCV instance): The UserCV instance containing multiple vector fields.
-    Returns:
-    QuerySet: A Django QuerySet containing the top matching job offers, based on the average distance across all vectors.
-    """
-
     # List of vector fields to consider
     vector_fields = ['studies_vector', 'experience_vector', 'abilities_vector', 'languages_vector', 'hobbies_vector']
     sql_parts = []
@@ -68,20 +57,4 @@ def search_jobs(query_input, from_text=False):
     ).order_by('distance')[:10]
 
     return job_offers
-
-
-
-def concatenate_vectors(user_cv):
-    # Assuming each vector component is an array and sufficiently large
-    vectors = [
-        user_cv.studies_vector[:306],  # Adjust slice sizes to match total dimension required
-        user_cv.experience_vector[:306],
-        user_cv.abilities_vector[:306],
-        user_cv.languages_vector[:306],
-        user_cv.hobbies_vector[:306]
-    ]
-    # Ensure each is an array slice, concatenate along the first axis
-    concatenated_vector = np.concatenate(vectors)
-    return concatenated_vector.tolist()
-
 
