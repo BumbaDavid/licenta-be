@@ -150,6 +150,7 @@ class UserLoginResource(ModelResource):
                 profile = getattr(user_data, 'user_profile', None)
                 user_cv = getattr(user_data, 'user_cv', None)
                 data_to_send = {
+                    'user_id': user_data.id,
                     'username': user_data.username,
                     'email': user_data.email,
                     'first_name': user_data.first_name,
@@ -172,6 +173,7 @@ class UserLoginResource(ModelResource):
             elif user_data.account_type == 'company':
                 company_profile = getattr(user_data, 'company_profile', None)
                 data_to_send = {
+                    'id': user.id,
                     'username': user_data.username,
                     'email': user_data.email,
                     'account_type': user_data.account_type,

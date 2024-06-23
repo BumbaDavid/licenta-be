@@ -53,7 +53,9 @@ class ChatbotResource(ModelResource):
             job_matches = [{
                 'id': job.id,
                 'job_title': job.job_title,
-                'job_description': job.job_description,
+                'location': job.location,
+                'job_category': job.job_category,
+                'job_type': job.job_type
             } for job in job_matches]
 
         return self.create_response(request, {'jobs': job_matches})
